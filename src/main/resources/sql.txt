@@ -1,0 +1,229 @@
+create table received
+(
+equipment_id SERIAL PRIMARY KEY,
+sn TEXT NOT null,
+group_id integer not null,
+guarantee_id integer not null
+);
+
+create table group
+(
+group_id SERIAL PRIMARY KEY,
+description TEXT,
+model TEXT,
+group_info TEXT,
+);
+
+
+create table organization
+(
+organization_id SERIAL PRIMARY KEY,
+org_name TEXT,
+tel VARCHAR(24) not null,
+address TEXT,
+organization_info TEXT
+);
+insert into organization (org_name, tel, address, organization_info)
+values ('Linkinpark', '+375298787878', 'г. Витебск ул. Горовца д.12 каб.17 ',  '№ 367452 Иван');
+
+insert into organization (org_name, tel, address, organization_info)
+values ('special_master', '+375291112222', 'г. Гомель ул. Кирова д.72 каб.25 ',  '№ 35641 Таня');
+
+
+create table guarantee
+(
+guarantee_id SERIAL PRIMARY KEY,
+organization_id integer not null,
+validity_id integer not null
+)
+
+insert into guarantee (organization_id, validity_id)
+values ('1', '1');
+
+create table validity
+(
+validity_id SERIAL PRIMARY KEY,
+date TEXT NOT null,
+month integer not null,
+org_name text not NULL,
+contract TEXT NOT null,
+validity_info TEXT
+);
+
+insert into validity (date, month, org_name, contract, validity_info)
+values ('2020-06-25', '36', 'Linkinpark', '5654AAZ', 'постгарантия по доп. условию');
+
+create table history
+(
+history_id SERIAL PRIMARY KEY,
+sn TEXT NOT null,
+date TEXT NOT null,
+status TEXT NOT null,
+organization TEXT NOT null
+);
+
+create table logsql
+(
+log_id SERIAL PRIMARY KEY,
+user_name TEXT NOT null,
+date TEXT NOT null,
+sql_code TEXT NOT null
+);
+
+
+
+
+create table user_account
+(
+user_id SERIAL PRIMARY KEY,
+date TEXT NOT null,
+Surname VARCHAR(30) not null,
+First_Name VARCHAR(30) not null,
+Otchestvo VARCHAR(30) not null,
+Otdel VARCHAR(30) not null,
+Tel VARCHAR(30) not null,	
+email varchar(128),
+User_Name VARCHAR(30) not null,
+PASSWORD  VARCHAR(30) not null,
+Rule VARCHAR(10) not null
+);
+
+insert into user_account (date, surname, first_name, otchestvo, otdel, tel, email, user_name, password, rule)
+values ('2020-08-20', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin');
+
+insert into user_account (date, surname, first_name, otchestvo, otdel, tel, email, user_name, password, rule)
+values ('2020-08-20', 'User1', 'User1', 'User1', 'User1', 'User1', 'User1', 'User1', 'Admin', 'User');
+
+create table auth
+(
+id SERIAL PRIMARY KEY,
+date_start TEXT NOT null,
+date_end TEXT,
+ip TEXT NOT null,
+host TEXT,
+getway TEXT,
+user_in TEXT,
+pass_in TEXT,
+session TEXT NOT null,
+status VARCHAR(8) NOT null
+);
+
+
+Select organization_id, description, tel, address, (SELECT date from guarantee WHERE guarantee.guarantee_id=organization.guarantee_id) as guarantee, organization_info
+from organization
+
+
+
+
+
+mysql:
+
+
+create table received
+(
+equipment_id INT NOT NULL AUTO_INCREMENT,
+sn TEXT NOT null,
+group_id integer not null,
+guarantee_id integer not null,
+PRIMARY KEY ( equipment_id )
+);
+
+create table group
+(
+group_id INT NOT NULL AUTO_INCREMENT,
+description TEXT,
+model TEXT,
+group_info TEXT,
+PRIMARY KEY ( group_id )
+);
+
+
+create table organization
+(
+organization_id INT NOT NULL AUTO_INCREMENT,
+org_name TEXT,
+tel VARCHAR(24) not null,
+address TEXT,
+organization_info TEXT,
+PRIMARY KEY ( organization_id )
+);
+
+
+create table guarantee
+(
+guarantee_id INT NOT NULL AUTO_INCREMENT,
+organization_id integer not null,
+validity_id integer not null,
+PRIMARY KEY ( guarantee_id )
+)
+
+
+create table validity
+(
+validity_id INT NOT NULL AUTO_INCREMENT,
+date TEXT NOT null,
+month integer not null,
+org_name text not NULL,
+contract TEXT NOT null,
+validity_info TEXT,
+PRIMARY KEY ( validity_id )
+);
+
+create table history
+(
+history_id INT NOT NULL AUTO_INCREMENT,
+sn TEXT NOT null,
+date TEXT NOT null,
+status TEXT NOT null,
+organization TEXT NOT null,
+PRIMARY KEY ( history_id )
+);
+
+create table logsql
+(
+log_id INT NOT NULL AUTO_INCREMENT,
+user_name TEXT NOT null,
+date TEXT NOT null,
+sql_code TEXT NOT null,
+PRIMARY KEY ( log_id )
+);
+
+
+
+
+create table user_account
+(
+user_id INT NOT NULL AUTO_INCREMENT,
+date TEXT NOT null,
+Surname VARCHAR(30) not null,
+First_Name VARCHAR(30) not null,
+Otchestvo VARCHAR(30) not null,
+Otdel VARCHAR(30) not null,
+Tel VARCHAR(30) not null,	
+email varchar(128),
+User_Name VARCHAR(30) not null,
+PASSWORD  VARCHAR(30) not null,
+Rule VARCHAR(10) not null,
+PRIMARY KEY ( user_id )
+);
+
+insert into user_account (date, surname, first_name, otchestvo, otdel, tel, email, user_name, password, rule)
+values ('2020-08-20', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin1234', 'Admin');
+
+
+create table auth
+(
+id INT NOT NULL AUTO_INCREMENT,
+date_start TEXT NOT null,
+date_end TEXT,
+ip TEXT NOT null,
+host TEXT,
+getway TEXT,
+user_in TEXT,
+pass_in TEXT,
+session TEXT NOT null,
+status VARCHAR(8) NOT null,
+PRIMARY KEY ( id )
+);
+
+

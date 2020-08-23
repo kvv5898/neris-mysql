@@ -1,0 +1,35 @@
+.header {
+left: 0;
+top: 0;
+width: 100%;
+}
+
+.error {
+
+height: 20px;
+width: 100%;
+}
+
+
+  table {
+ width: 100%;
+ display:content;
+ table-layout:auto;
+ }
+ 
+  thead th {
+            position: -webkit-sticky;
+            /* for Safari */
+            position: sticky;
+            top: 0;
+            background: gray;
+
+        }
+        
+        .filterInput{
+    margin: 0;
+    padding: 0;
+    width: 98%;
+    border: 1px;
+    border-style: solid;    
+}
